@@ -3,12 +3,14 @@ import useBlogLogic from "../hooks/useBlogLogic";
 import "../style/blog.css";
 
 function BlogApp() {
-    const { posts, title, content, setContent, setTitle, setPosts, addPost, deletePost, editPost, editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit } = useBlogLogic();
+    const { posts, title, content, setContent, setTitle, setPosts, addPost, deletePost, editPost, editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit , toggleDarkMode,isDarkMode } = useBlogLogic();
     let postItems = [];
 
 
     return (
-        <div className="container">
+        <div className={`container ${isDarkMode ? "dark" : ""}`}>
+
+            <button onClick={toggleDarkMode}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
             <h1 className="header">My Blog Website</h1>
             <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <textarea placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} />

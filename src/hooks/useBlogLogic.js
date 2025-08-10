@@ -14,6 +14,7 @@ function useBlogLogic() {
 
   const toggleDarkMode = () =>{
     setIsDarkMode(!isDarkMode);
+    console.log(isDarkMode)
   }
 
   const addPost = (title, content) => {
@@ -53,6 +54,7 @@ function useBlogLogic() {
     posts, setPosts,
     title, setTitle, setContent, content, addPost, deletePost, editPost
     , editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit
+    ,toggleDarkMode,isDarkMode
   }
 }
 
