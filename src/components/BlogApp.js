@@ -3,7 +3,7 @@ import useBlogLogic from "../hooks/useBlogLogic";
 import "../style/blog.css";
 
 function BlogApp() {
-    const { posts, title, content, setContent, setTitle, setPosts, addPost, deletePost, editPost, editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit , toggleDarkMode,isDarkMode } = useBlogLogic();
+    const { posts, title, content, setContent, setTitle, setPosts, addPost, deletePost, editPost, editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit, toggleDarkMode, isDarkMode,id ,page, nextPage, prevPage, indexLast, visiblePosts,loading } = useBlogLogic();
     let postItems = [];
 
 
@@ -36,6 +36,17 @@ function BlogApp() {
                     }}>Save</button>
                 </div>
             ))}
+
+            {visiblePosts.map(post => (
+                <div key={post.id} className="post">
+                    <h2>{post.title}</h2>
+                    <p>{post.content}</p>
+                </div>
+            ))}
+
+            {/* Loading Indicator */}
+            {loading && <p>Loading more posts...</p>}
+
         </div>
     )
 }

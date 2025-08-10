@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function useBlogLogic() {
   const [posts, setPosts] = useState([
@@ -11,8 +11,38 @@ function useBlogLogic() {
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  const toggleDarkMode = () =>{
+  const postsPerPage = 3;
+  const indexLast = page * postsPerPage;
+  const indexFirst = indexLast - postsPerPage;
+   const visiblePosts = posts.slice(0, indexLast); 
+  const nextPage = () => {
+    setPage(page + 1);
+  }
+
+  const prevPage = () => setPage(page - 1);
+  const loadMore = () => {
+    setPage(prev => prev + 1);
+  }
+
+  useEffect(() => {
+    const handleScroll = () => {
+       if (!loading) {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        setPage(prev=>prev+1); // Load next posts
+      }}
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  },[loading])
+  
+  useEffect(()=>{
+    setLoading(false);
+  },page);
+
+  const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     console.log(isDarkMode)
   }
@@ -54,7 +84,7 @@ function useBlogLogic() {
     posts, setPosts,
     title, setTitle, setContent, content, addPost, deletePost, editPost
     , editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit
-    ,toggleDarkMode,isDarkMode
+    , toggleDarkMode, isDarkMode, page, nextPage, prevPage, indexFirst, indexLast,visiblePosts, loading
   }
 }
 

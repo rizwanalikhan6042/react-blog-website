@@ -82,7 +82,7 @@ button:hover {
   color: #555;
   line-height: 1.5;
 }
-.dark {
+ .dark {
   background: #1e1e1e;
   color: white;
   min-height: 100vh; /* Extra from my version */
@@ -113,5 +113,27 @@ button:hover {
 .dark .post h2,
 .dark .post p {
   color: #f5f5f5; /* Light text for visibility */
+} 
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  background: linear-gradient(45deg, #6a5acd, #00bfff);
+  color: white;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
 }
 
