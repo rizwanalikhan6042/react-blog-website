@@ -3,7 +3,7 @@ import useBlogLogic from "../hooks/useBlogLogic";
 import "../style/blog.css";
 
 function BlogApp() {
-    const { posts, title, content, setContent, setTitle, setPosts, addPost,deletePost } = useBlogLogic();
+    const { posts, title, content, setContent, setTitle, setPosts, addPost, deletePost, editPost, editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit } = useBlogLogic();
     let postItems = [];
 
 
@@ -18,7 +18,20 @@ function BlogApp() {
                 <div key={p.id} className="post">
                     <h2>{p.title}</h2>
                     <p>{p.content}</p>
-                    <button onClick={()=>deletePost(p.id)}>Delete</button>
+                    <button onClick={() => deletePost(p.id)}>Delete</button>
+                    <button onClick={() => startEdit(p.id, p.title, p.content)} >Edit</button>
+                    {editId === p.id && (
+                        <button onClick={() => editPost(editId, editTitle, editContent)}>Save</button>
+                    )}
+                    <input placeholder="New Title" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+                    <textarea
+                        placeholder="New Content"
+                        value={editContent}
+                        onChange={(e) => setEditContent(e.target.value)}
+                    />
+                    <button onClick={() => {
+                        editPost(editId, editTitle, editContent)
+                    }}>Save</button>
                 </div>
             ))}
         </div>
