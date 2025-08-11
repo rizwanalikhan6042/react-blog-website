@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 
 function useBlogLogic() {
   const [posts, setPosts] = useState([
@@ -15,6 +15,8 @@ function useBlogLogic() {
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   const postsPerPage = 3;
   const indexLast = page * postsPerPage;
@@ -100,7 +102,7 @@ function useBlogLogic() {
     posts, setPosts,
     title, setTitle, setContent, content, addPost, deletePost, editPost
     , editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit
-    , toggleDarkMode, isDarkMode, page, nextPage, prevPage, indexFirst, indexLast, visiblePosts, loading, searchTerm, setSearchTerm, sortOrder,setSortOrder,sortedPosts,paginatedPosts
+    , toggleDarkMode, isDarkMode, page, nextPage, prevPage, indexFirst, indexLast, visiblePosts, loading, searchTerm, setSearchTerm, sortOrder,setSortOrder,sortedPosts,paginatedPosts, user, setUser, token, setToken
   }
 }
 
