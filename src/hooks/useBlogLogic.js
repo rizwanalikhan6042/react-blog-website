@@ -13,11 +13,13 @@ function useBlogLogic() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const postsPerPage = 3;
   const indexLast = page * postsPerPage;
   const indexFirst = indexLast - postsPerPage;
-   const visiblePosts = posts.slice(0, indexLast); 
+  const visiblePosts = posts.slice(0, indexLast);
   const nextPage = () => {
     setPage(page + 1);
   }
@@ -29,18 +31,19 @@ function useBlogLogic() {
 
   useEffect(() => {
     const handleScroll = () => {
-       if (!loading) {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        setPage(prev=>prev+1); // Load next posts
-      }}
+      if (!loading) {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+          setPage(prev => prev + 1); // Load next posts
+        }
+      }
     }
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  },[loading])
-  
-  useEffect(()=>{
+  }, [loading])
+
+  useEffect(() => {
     setLoading(false);
-  },page);
+  }, page);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -80,11 +83,24 @@ function useBlogLogic() {
     setEditContent(content);
   }
 
+
+  const filteredPost = posts.filter(post =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const sortedPosts = [...filteredPost].sort((a, b) => {
+    if (sortOrder === "asc") return a.title.localeCompare(b.title);
+    if (sortOrder === "desc") return b.title.localeCompare(a.title);
+    return 0;
+  })
+
+ const paginatedPosts = sortedPosts.slice(0, page * postsPerPage);
   return {
     posts, setPosts,
     title, setTitle, setContent, content, addPost, deletePost, editPost
     , editId, editContent, editTitle, setEditContent, setEditId, setEditTitle, startEdit
-    , toggleDarkMode, isDarkMode, page, nextPage, prevPage, indexFirst, indexLast,visiblePosts, loading
+    , toggleDarkMode, isDarkMode, page, nextPage, prevPage, indexFirst, indexLast, visiblePosts, loading, searchTerm, setSearchTerm, sortOrder,setSortOrder,sortedPosts,paginatedPosts
   }
 }
 
