@@ -13,6 +13,7 @@ const navigate = useNavigate();
       navigate("/");
     }
   };
+  
   return (
     <div>
       <h2>Login</h2>
@@ -28,7 +29,7 @@ const navigate = useNavigate();
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={doLogin}>Login</button>
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 }

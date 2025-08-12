@@ -35,14 +35,14 @@ function BlogApp() {
             <button onClick={toggleDarkMode}>
                 {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
-            <p>{user ? `Welcome + ${user.name}` : "You are not logged in"} </p>
+            <p>{user ? `Welcome ${user.name}` : "You are not logged in"} </p>
 
             {user ? (
                 <LogoutButton />
             ) : (
                 <div className="login-box">
-                    <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-                    <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+                    <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
+                    <input placeholder="Password" type="password" onChange={(e)=>setPassword(e.target.value)} />
                     <button onClick={handleLogin}>Login</button>
                 </div>
             )}

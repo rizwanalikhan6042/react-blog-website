@@ -9,9 +9,9 @@ const SECRET_KEY = "super-secret-key";
 // --- Login route ---
 app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
-
+    console.log("Received from frontend:", email, password);
   // Dummy authentication check
-  if (email === "riz@gmail.com" && password === "123456") {
+  if (email === "test@example.com" && password === "123456") {
      const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: "1h" });
      console.log(token)
     return res.json({ token, user: { id: 1, name: "Test User", email } });
