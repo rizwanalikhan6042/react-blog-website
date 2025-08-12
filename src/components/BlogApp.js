@@ -3,6 +3,7 @@ import useBlogLogic from "../hooks/useBlogLogic";
 import useAuthLogic from "../hooks/useAuthLogic";
 import "../style/blog.css";
 import LogoutButton from "./LogoutButton";
+import LoginPage from "./LoginPage";
 
 function BlogApp() {
     const {
@@ -35,16 +36,17 @@ function BlogApp() {
             <button onClick={toggleDarkMode}>
                 {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
-            <p>{user ? `Welcome ${user.name}` : "You are not logged in"} </p>
+            <p className="welcome-text">{user ? `Welcome ${user.name}` : "You are not logged in"}</p>
 
             {user ? (
                 <LogoutButton />
             ) : (
-                <div className="login-box">
-                    <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
-                    <input placeholder="Password" type="password" onChange={(e)=>setPassword(e.target.value)} />
-                    <button onClick={handleLogin}>Login</button>
-                </div>
+                // <div className="login-box">
+                //     <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
+                //     <input placeholder="Password" type="password" onChange={(e)=>setPassword(e.target.value)} />
+                //     <button onClick={handleLogin}>Login</button>
+                // </div>
+                <LoginPage />
             )}
             <h1 className="header">My Blog Website</h1>
 
@@ -57,7 +59,7 @@ function BlogApp() {
             />
 
             {/* Sorting dropdown */}
-            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+            <select className="filter-select" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
                 <option value="">Sort By</option>
                 <option value="asc">Title (A-Z)</option>
                 <option value="desc">Title (Z-A)</option>

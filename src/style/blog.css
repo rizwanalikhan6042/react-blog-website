@@ -136,4 +136,80 @@ button:hover {
   background: #aaa;
   cursor: not-allowed;
 }
+/* ---------------------------
+   Welcome text styling
+   --------------------------- */
+.welcome-text {
+  display: inline-block;            /* content-sized box */
+  margin: 0.5rem 0;                 /* space above/below */
+  padding: 0.425rem 0.75rem;        /* comfortable padding */
+  font-size: 1rem;                  /* readable on small screens */
+  font-weight: 600;  
+   color: #333;                /* slightly bold */                 /* dark slate (easy on eyes) */
+  background: linear-gradient(90deg, rgba(99,102,241,0.12), rgba(56,189,248,0.06));
+  border: 1px solid rgba(15,23,42,0.06);
+  border-radius: 10px;              /* pill-like rounded box */
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06); /* gentle depth */
+  letter-spacing: 0.2px;            /* slight spacing for clarity */
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.dark .welcome-text {
+  color: #fff;
+}
+
+/* subtle hover for desktop */
+.welcome-text:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.08);
+}
+
+/* smaller size on very small screens */
+@media (max-width: 420px) {
+  .welcome-text {
+    font-size: 0.92rem;
+    padding: 0.35rem 0.6rem;
+  }
+}
+
+/* ---------------------------
+   Filter (select) styling
+   --------------------------- */
+.filter-select {
+  appearance: none;                 /* remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.45rem 1.1rem 0.45rem 0.6rem; /* room for our custom arrow */
+  border-radius: 8px;
+  border: 1px solid rgba(15,23,42,0.08);
+  background: white;
+  background-image: linear-gradient(45deg, transparent 50%, #94a3b8 50%),
+                    linear-gradient(135deg, #94a3b8 50%, transparent 50%),
+                    linear-gradient(to right, rgba(99,102,241,0.06), rgba(56,189,248,0.03));
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), 0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(2,6,23,0.03);
+  transition: border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+
+/* Hover & focus */
+.filter-select:hover {
+  transform: translateY(-1px);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: rgba(99,102,241,0.6);
+  box-shadow: 0 8px 22px rgba(99,102,241,0.08);
+}
+
+/* Disabled/small-screen adjustment */
+@media (max-width: 480px) {
+  .filter-select {
+    width: 100%;
+    padding-right: 1rem;
+  }
+}
 
