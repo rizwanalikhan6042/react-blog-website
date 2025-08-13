@@ -4,6 +4,8 @@ import useAuthLogic from "../hooks/useAuthLogic";
 import "../style/blog.css";
 import LogoutButton from "./LogoutButton";
 import LoginPage from "./LoginPage";
+import PostForm from "./PostForm";
+import PostCard from "./PostCard";
 
 function BlogApp() {
     const {
@@ -66,7 +68,7 @@ function BlogApp() {
             </select>
 
             {/* Add new post inputs */}
-            <input
+            {/* <input
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -78,10 +80,16 @@ function BlogApp() {
                 onChange={(e) => setContent(e.target.value)}
             />
 
-            <button onClick={() => addPost(title, content)}>Add Post</button>
-
+            <button onClick={() => addPost(title, content)}>Add Post</button> */}
+            <PostForm
+                title={title}
+                setTitle={setTitle}
+                content={content}
+                setContent={setContent}
+                addPost={() => addPost(title, content)}
+            />
             {/* Posts listing with edit/delete */}
-            {paginatedPosts.map((post) => (
+            {/* {paginatedPosts.map((post) => (
                 <div key={post.id} className="post">
                     <h2>{post.title}</h2>
                     <p>{post.content}</p>
@@ -109,6 +117,20 @@ function BlogApp() {
                         </>
                     )}
                 </div>
+            ))} */}
+            {paginatedPosts.map((post) => (
+                <PostCard
+                    key={post.id}
+                    post={post}
+                    editId={editId}
+                    editTitle={editTitle}
+                    editContent={editContent}
+                    setEditTitle={setEditTitle}
+                    setEditContent={setEditContent}
+                    startEdit={startEdit}
+                    deletePost={deletePost}
+                    editPost={editPost}
+                />
             ))}
         </div>
     );
