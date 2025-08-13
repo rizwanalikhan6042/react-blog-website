@@ -3,6 +3,9 @@ import useBlogLogic from "../hooks/useBlogLogic";
 import useAuthLogic from "../hooks/useAuthLogic";
 import "../style/blog.css";
 import LogoutButton from "./LogoutButton";
+import LoginPage from "./LoginPage";
+import PostForm from "./PostForm";
+import PostCard from "./PostCard";
 
 function BlogApp() {
     const {
@@ -35,16 +38,17 @@ function BlogApp() {
             <button onClick={toggleDarkMode}>
                 {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
-            <p>{user ? `Welcome ${user.name}` : "You are not logged in"} </p>
+            <p className="welcome-text">{user ? `Welcome ${user.name}` : "You are not logged in"}</p>
 
             {user ? (
                 <LogoutButton />
             ) : (
-                <div className="login-box">
-                    <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
-                    <input placeholder="Password" type="password" onChange={(e)=>setPassword(e.target.value)} />
-                    <button onClick={handleLogin}>Login</button>
-                </div>
+                // <div className="login-box">
+                //     <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
+                //     <input placeholder="Password" type="password" onChange={(e)=>setPassword(e.target.value)} />
+                //     <button onClick={handleLogin}>Login</button>
+                // </div>
+                <LoginPage />
             )}
             <h1 className="header">My Blog Website</h1>
 
@@ -57,14 +61,14 @@ function BlogApp() {
             />
 
             {/* Sorting dropdown */}
-            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+            <select className="filter-select" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
                 <option value="">Sort By</option>
                 <option value="asc">Title (A-Z)</option>
                 <option value="desc">Title (Z-A)</option>
             </select>
 
             {/* Add new post inputs */}
-            <input
+            {/* <input
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -76,10 +80,16 @@ function BlogApp() {
                 onChange={(e) => setContent(e.target.value)}
             />
 
-            <button onClick={() => addPost(title, content)}>Add Post</button>
-
+            <button onClick={() => addPost(title, content)}>Add Post</button> */}
+            <PostForm
+                title={title}
+                setTitle={setTitle}
+                content={content}
+                setContent={setContent}
+                addPost={() => addPost(title, content)}
+            />
             {/* Posts listing with edit/delete */}
-            {paginatedPosts.map((post) => (
+            {/* {paginatedPosts.map((post) => (
                 <div key={post.id} className="post">
                     <h2>{post.title}</h2>
                     <p>{post.content}</p>
@@ -107,6 +117,20 @@ function BlogApp() {
                         </>
                     )}
                 </div>
+            ))} */}
+            {paginatedPosts.map((post) => (
+                <PostCard
+                    key={post.id}
+                    post={post}
+                    editId={editId}
+                    editTitle={editTitle}
+                    editContent={editContent}
+                    setEditTitle={setEditTitle}
+                    setEditContent={setEditContent}
+                    startEdit={startEdit}
+                    deletePost={deletePost}
+                    editPost={editPost}
+                />
             ))}
         </div>
     );
